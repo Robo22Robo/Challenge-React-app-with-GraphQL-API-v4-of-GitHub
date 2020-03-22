@@ -2,6 +2,7 @@ import React from "react";
 
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
+import "styled-components/macro";
 
 import Photo from "./Photo ";
 
@@ -10,6 +11,7 @@ const GET_VIEWER = gql`
     viewer {
       avatarUrl
       login
+      id
       name
     }
   }

@@ -8,6 +8,7 @@ import { HttpLink } from "apollo-link-http";
 
 import { ApolloClient } from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import Column from "./components/Column";
 import Sidebar from "./components/Sidebar";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
@@ -46,7 +47,22 @@ function App() {
       <Global />
       {accessToken ? (
         <ApolloProvider client={client}>
-          <Sidebar />
+          <div
+            css={{
+              display: "grid",
+              gridTemplateColumns: "80px repeat(auto-fit, 300px)",
+              alignItems: "start",
+              height: "calc(100vh - 4px)",
+              overflow: "hidden"
+            }}
+          >
+            <Sidebar />
+            <Column repositoryOwner="nuwave" repository="lighthouse" />
+            <Column
+              repositoryOwner="Robo22Robo"
+              repository="Challenge-React-app-with-GraphQL-API-v4-of-GitHub"
+            />
+          </div>
         </ApolloProvider>
       ) : (
         <Login />
