@@ -1,46 +1,30 @@
 import React, { Fragment } from "react";
 import "styled-components/macro";
-import "./App.scss";
+
 import { createGlobalStyle } from "styled-components";
 import "styled-components/macro";
 import Login from "./Login";
+import { HttpLink } from "apollo-link-http";
+
+import { ApolloClient } from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import Sidebar from "./components/Sidebar";
+import { InMemoryCache } from "apollo-cache-inmemory";
 
 const accessToken = localStorage.getItem("token");
-
-fetch("https://api.github.com/graphql", {
-  method: "POST",
+const httpLink = new HttpLink({
+  uri: "https://api.github.com/graphql",
   headers: {
-    Authorization: `bearer ${accessToken}`
-  },
-  body: JSON.stringify({
-    query: `
-    {
-      repositoryOwner(login: "nuwave"){
-      repository(name: "lighthouse") {
-         ref(qualifiedName: "master"){
-          associatedPullRequests(last: 10) {
-            edges {
-              node {
-                
-                bodyText
-                body
-                
-                mergeCommit {
-                  id
-                  message
-                }
-              }
-            }
-          }
-        }
-      }
-      }
-    }
-    `
-  })
-})
-  .then(res => res.json())
-  .then(json => console.log(json));
+    Authorization: `Bearer ${accessToken}`
+  }
+});
+
+// get the authentication token from local storage if it exists
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache()
+});
 
 const Global = createGlobalStyle({
   body: {
@@ -61,14 +45,9 @@ function App() {
     <>
       <Global />
       {accessToken ? (
-        <button
-          onClick={() => {
-            localStorage.clear();
-            window.location.reload();
-          }}
-        >
-          Logout
-        </button>
+        <ApolloProvider client={client}>
+          <Sidebar />
+        </ApolloProvider>
       ) : (
         <Login />
       )}
