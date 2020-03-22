@@ -5,6 +5,43 @@ import { createGlobalStyle } from "styled-components";
 import "styled-components/macro";
 import Login from "./Login";
 
+const accessToken = localStorage.getItem("token");
+
+fetch("https://api.github.com/graphql", {
+  method: "POST",
+  headers: {
+    Authorization: `bearer ${accessToken}`
+  },
+  body: JSON.stringify({
+    query: `
+    {
+      repositoryOwner(login: "nuwave"){
+      repository(name: "lighthouse") {
+         ref(qualifiedName: "master"){
+          associatedPullRequests(last: 10) {
+            edges {
+              node {
+                
+                bodyText
+                body
+                
+                mergeCommit {
+                  id
+                  message
+                }
+              }
+            }
+          }
+        }
+      }
+      }
+    }
+    `
+  })
+})
+  .then(res => res.json())
+  .then(json => console.log(json));
+
 const Global = createGlobalStyle({
   body: {
     backgroundColor: "#fff",
@@ -23,7 +60,18 @@ function App() {
   return (
     <>
       <Global />
-      <Login />
+      {accessToken ? (
+        <button
+          onClick={() => {
+            localStorage.clear();
+            window.location.reload();
+          }}
+        >
+          Logout
+        </button>
+      ) : (
+        <Login />
+      )}
     </>
   );
 }
