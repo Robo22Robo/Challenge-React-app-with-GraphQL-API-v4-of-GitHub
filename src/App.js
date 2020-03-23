@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import "styled-components/macro";
 
 import { createGlobalStyle } from "styled-components";
@@ -72,6 +72,7 @@ function App() {
               repositoryOwner={repositoryOwnerVar}
               repository={repositoryVar}
             />
+
             <Column3
               repositoryOwner={repositoryOwnerVar}
               repository={repositoryVar}

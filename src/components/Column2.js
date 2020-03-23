@@ -10,20 +10,18 @@ const GET_OPEN_ISSUES = gql`
   query($repositoryOwner: String!, $repository: String!) {
     repositoryOwner(login: $repositoryOwner) {
       repository(name: $repository) {
+        name
         issues(states: [OPEN], last: 10) {
+          totalCount
+          nodes {
+            title
+          }
           edges {
             node {
               createdAt
               title
+              id
               url
-              comments(last: 10) {
-                edges {
-                  node {
-                    id
-                    body
-                  }
-                }
-              }
             }
           }
         }
@@ -52,7 +50,16 @@ const Column2 = ({ repositoryOwner, repository }) => (
           {loading && <div>loading ... </div>}
           {error && <div>{JSON.stringify(error)}</div>}
           {data && data.repositoryOwner && (
-            <div>{JSON.stringify(data.repositoryOwner)}</div>
+            <div>
+              <h2>
+                {data.repositoryOwner.repository.name}(
+                {data.repositoryOwner.repository.issues.totalCount})
+              </h2>
+
+              {data.repositoryOwner.repository.issues.nodes.map((pull, id) => (
+                <p key={id}>{pull.title} </p>
+              ))}
+            </div>
           )}
         </>
       )}
