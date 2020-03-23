@@ -63,7 +63,7 @@ function App() {
             }}
           >
             <Sidebar />
-            <SearchParams />
+
             <Column
               repositoryOwner={repositoryOwnerVar}
               repository={repositoryVar}

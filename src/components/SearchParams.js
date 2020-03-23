@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 let SearchParams = () => {
-  let repositoryOwnerVar = "nuwave";
+  let [repositoryOwnerVar, setRepositoryOwnerVar] = useState("nuwave");
+
   return (
     <div className="search-params">
+      <h1>{repositoryOwnerVar}</h1>
       <form>
         <label htmlFor="repositoryOwnerVar">
           repositoryOwnerVar
@@ -11,6 +13,7 @@ let SearchParams = () => {
             id="repositoryOwnerVar"
             value={repositoryOwnerVar}
             placeholder="repositoryOwnerVar"
+            onChange={e => setRepositoryOwnerVar(e.target.value)}
           />
         </label>
         <button>Submit</button>
