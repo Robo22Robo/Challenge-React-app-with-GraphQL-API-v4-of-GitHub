@@ -12,6 +12,7 @@ import Column from "./components/Column";
 import Column2 from "./components/Column2";
 import Column3 from "./components/Column3";
 import Sidebar from "./components/Sidebar";
+import SearchParams from "./components/SearchParams";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 const accessToken = localStorage.getItem("token");
@@ -62,6 +63,7 @@ function App() {
             }}
           >
             <Sidebar />
+            <SearchParams />
             <Column
               repositoryOwner={repositoryOwnerVar}
               repository={repositoryVar}
