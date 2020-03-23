@@ -9,6 +9,8 @@ import { HttpLink } from "apollo-link-http";
 import { ApolloClient } from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Column from "./components/Column";
+import Column2 from "./components/Column2";
+import Column3 from "./components/Column3";
 import Sidebar from "./components/Sidebar";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
@@ -19,6 +21,9 @@ const httpLink = new HttpLink({
     Authorization: `Bearer ${accessToken}`
   }
 });
+
+let repositoryOwnerVar = "nuwave";
+let repositoryVar = "lighthouse";
 
 // get the authentication token from local storage if it exists
 
@@ -57,10 +62,17 @@ function App() {
             }}
           >
             <Sidebar />
-            <Column repositoryOwner="nuwave" repository="lighthouse" />
             <Column
-              repositoryOwner="Robo22Robo"
-              repository="Challenge-React-app-with-GraphQL-API-v4-of-GitHub"
+              repositoryOwner={repositoryOwnerVar}
+              repository={repositoryVar}
+            />
+            <Column2
+              repositoryOwner={repositoryOwnerVar}
+              repository={repositoryVar}
+            />
+            <Column3
+              repositoryOwner={repositoryOwnerVar}
+              repository={repositoryVar}
             />
           </div>
         </ApolloProvider>

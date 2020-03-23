@@ -6,17 +6,25 @@ import "styled-components/macro";
 
 import RepoCard from "./RepoCard";
 
-const GET_PULL_REQUESTS = gql`
+const GET_OPEN_ISSUES = gql`
   query($repositoryOwner: String!, $repository: String!) {
     repositoryOwner(login: $repositoryOwner) {
       repository(name: $repository) {
-        name
-        pullRequests(last: 10) {
-          totalCount
-          nodes {
-            id
-            title
-            closed
+        issues(states: [OPEN], last: 10) {
+          edges {
+            node {
+              createdAt
+              title
+              url
+              comments(last: 10) {
+                edges {
+                  node {
+                    id
+                    body
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -35,13 +43,10 @@ const ColumnWrapper = styled("section")({
   overflowY: "scroll"
 });
 
-const Column = ({ repositoryOwner, repository }) => (
+const Column2 = ({ repositoryOwner, repository }) => (
   <ColumnWrapper>
-    <h3>List of pull requests (last 10)</h3>
-    <Query
-      query={GET_PULL_REQUESTS}
-      variables={{ repositoryOwner, repository }}
-    >
+    <h3>List of open issues (last 10)</h3>
+    <Query query={GET_OPEN_ISSUES} variables={{ repositoryOwner, repository }}>
       {({ data, error, loading }) => (
         <>
           {loading && <div>loading ... </div>}
@@ -55,4 +60,4 @@ const Column = ({ repositoryOwner, repository }) => (
   </ColumnWrapper>
 );
 
-export default Column;
+export default Column2;
