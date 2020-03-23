@@ -43,7 +43,6 @@ const ColumnWrapper = styled("section")({
 
 const Column2 = ({ repositoryOwner, repository }) => (
   <ColumnWrapper>
-    <h3>List of open issues (last 10)</h3>
     <Query query={GET_OPEN_ISSUES} variables={{ repositoryOwner, repository }}>
       {({ data, error, loading }) => (
         <>
@@ -51,10 +50,14 @@ const Column2 = ({ repositoryOwner, repository }) => (
           {error && <div>{JSON.stringify(error)}</div>}
           {data && data.repositoryOwner && (
             <div>
-              <h2>
-                {data.repositoryOwner.repository.name}(
-                {data.repositoryOwner.repository.issues.totalCount})
-              </h2>
+              <h3>{data.repositoryOwner.repository.name}</h3>
+              <h3>
+                List of open issues (last 10) from{" "}
+                {data.repositoryOwner.repository.issues.totalCount}
+                <hr />
+              </h3>
+
+              <h3>Open issues:</h3>
 
               {data.repositoryOwner.repository.issues.nodes.map((pull, id) => (
                 <p key={id}>{pull.title} </p>

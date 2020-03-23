@@ -52,8 +52,6 @@ const ColumnWrapper = styled("section")({
 
 const Column = ({ repositoryOwner, repository }) => (
   <ColumnWrapper>
-    <h3>List of pull requests (last 10)</h3>
-
     <Query
       query={GET_PULL_REQUESTS}
       variables={{ repositoryOwner, repository }}
@@ -66,12 +64,14 @@ const Column = ({ repositoryOwner, repository }) => (
 
           {data && data.repositoryOwner && (
             <div>
-              <h2>
-                {data.repositoryOwner.repository.name} (
+              <h3>{data.repositoryOwner.repository.name}</h3>
+              <h3>
+                List of pull requests (last 10) from{" "}
                 {data.repositoryOwner.repository.pullRequests.totalCount})
-              </h2>
+                <hr />
+              </h3>
 
-              <h3>Pull requests</h3>
+              <h3>Pull requests:</h3>
 
               {data.repositoryOwner.repository.pullRequests.nodes.map(
                 (pull, id) => (
