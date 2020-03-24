@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 
-let SearchParams = () => {
-  let [repositoryOwnerVarChange, setRepositoryOwnerVarChange] = useState(
-    "nuwave"
-  );
-
+let SearchParams = props => {
   return (
-    <div className="search-params">
-      <h1>{repositoryOwnerVarChange}</h1>
+    <div style={{ marginLeft: "50px" }}>
+      <h3>{props.repositoryOwnerVarChange}</h3>
+      <h3>{props.repositoryVarChange}</h3>
+
       <form>
         <label htmlFor="repositoryOwnerVarChange">
-          repositoryOwnerVarChange
+          Choose repositoryOwner:
           <input
             id="repositoryOwnerVarChange"
-            value={repositoryOwnerVarChange}
+            value={props.repositoryOwnerVarChange}
             placeholder="repositoryOwnerVarChange"
-            onChange={e => setRepositoryOwnerVarChange(e.target.value)}
+            onChange={e => props.changeRepositoryOwner(e.target.value)}
           />
         </label>
-        <button>Submit</button>
+
+        <label htmlFor="repositoryVarChange">
+          Choose the repository:
+          <input
+            id="repositoryVarChange"
+            value={props.repositoryVarChange}
+            placeholder="repositoryVarChange"
+            onChange={e => props.changeRepositoryVar(e.target.value)}
+          />
+        </label>
       </form>
     </div>
   );

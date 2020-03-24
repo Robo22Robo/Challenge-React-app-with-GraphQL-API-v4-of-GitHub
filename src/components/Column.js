@@ -8,8 +8,6 @@ import { Query } from "react-apollo";
 
 import "styled-components/macro";
 
-import RepoCard from "./RepoCard";
-
 const GET_PULL_REQUESTS = gql`
   query($repositoryOwner: String!, $repository: String!) {
     repositoryOwner(login: $repositoryOwner) {

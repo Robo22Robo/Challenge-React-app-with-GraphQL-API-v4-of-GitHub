@@ -4,8 +4,6 @@ import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
 import "styled-components/macro";
 
-import RepoCard from "./RepoCard";
-
 const GET_OPEN_ISSUES = gql`
   query($repositoryOwner: String!, $repository: String!) {
     repositoryOwner(login: $repositoryOwner) {
