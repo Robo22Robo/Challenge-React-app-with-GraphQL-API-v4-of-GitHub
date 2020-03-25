@@ -12,7 +12,7 @@ let SearchParams = props => {
           <input
             id="repositoryOwnerVarChange"
             value={props.repositoryOwnerVarChange}
-            placeholder="repositoryOwnerVarChange"
+            placeholder="repositoryOwner"
             onChange={e => props.changeRepositoryOwner(e.target.value)}
           />
         </label>
@@ -22,7 +22,7 @@ let SearchParams = props => {
           <input
             id="repositoryVarChange"
             value={props.repositoryVarChange}
-            placeholder="repositoryVarChange"
+            placeholder="repository"
             onChange={e => props.changeRepositoryVar(e.target.value)}
           />
         </label>

@@ -60,7 +60,7 @@ const Column = ({ repositoryOwner, repository }) => (
 
           {error && <div>{JSON.stringify(error)}</div>}
 
-          {data && data.repositoryOwner && (
+          {data && data.repositoryOwner && data.repositoryOwner.repository && (
             <div>
               <h3>{data.repositoryOwner.repository.name}</h3>
               <h3>
