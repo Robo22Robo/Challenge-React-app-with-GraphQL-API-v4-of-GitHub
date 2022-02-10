@@ -14,7 +14,7 @@
     "bootstrap": "^4.4.1",
     "graphql": "^14.6.0",
     "jquery": "^3.4.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "now": "^16.7.3",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
